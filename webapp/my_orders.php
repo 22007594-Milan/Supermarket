@@ -49,7 +49,7 @@ $orders = $stmt->fetchAll();
             </ul>
 
             <div class="d-flex gap-2">
-                <?php if (isset($_SESSION['username'])): ?>
+                <?php if (isset($_SESSION['username'])): ?>  
                     <a href="cart.php" class="btn btn-outline-light btn-lg">🛍 View Cart</a>
                     <a href="logout.php" class="btn btn-danger btn-lg">Logout</a>
                 <?php else: ?>

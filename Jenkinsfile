@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git url: 'https://github.com/NivethLegend/supermarket-FYP.git', credentialsId: 'github-creds'
+                git url: 'https://github.com/NivethLegend/supermarket-FYP.git', credentialsId: 'github-creds', branch: 'main'
             }
         }
 
