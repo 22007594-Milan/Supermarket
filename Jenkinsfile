@@ -1,40 +1,39 @@
 pipeline {
     agent any
 
-    environment {
-        GIT_URL = 'https://github.com/NivethLegend/supermarket-FYP.git'
-        GIT_CREDENTIALS = 'github-creds'
-    }
-
     stages {
-        stage('Clone Repo') {
+        stage('Clone Repository') {
             steps {
-                script {
-                    withCredentials([string(credentialsId: "${GIT_CREDENTIALS}", variable: 'GITHUB_TOKEN')]) {
-                        sh '''
-                            rm -rf supermarket-FYP
-                            git clone https://NivethLegend:${GITHUB_TOKEN}@github.com/NivethLegend/supermarket-FYP.git
-                        '''
-                    }
-                }
+                echo 'Cloning from GitHub...'
+                git url: 'https://github.com/NivethLegend/supermarket-FYP.git', credentialsId: 'github-creds'
             }
         }
 
         stage('Build') {
             steps {
-                dir('supermarket-FYP') {
-                    sh 'echo "Running build..."'
-                }
+                echo 'Building application...'
+                // Example build step
+                sh 'echo Simulating build process'
             }
         }
 
         stage('Test') {
             steps {
-                dir('supermarket-FYP') {
-                    sh 'echo "Running tests..."'
-                }
+                echo 'Running basic tests...'
+                // Example test step
+                sh 'echo All tests passed!'
             }
         }
     }
+
+    post {
+        success {
+            echo '✅ Pipeline finished successfully.'
+        }
+        failure {
+            echo '❌ Pipeline failed. Check logs above.'
+        }
+    }
 }
+
 
