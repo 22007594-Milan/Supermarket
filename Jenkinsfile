@@ -5,35 +5,36 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning from GitHub...'
-                git url: 'https://github.com/NivethLegend/supermarket-FYP.git', credentialsId: 'github-creds'
+                git branch: 'main',
+                    url: 'https://github.com/NivethLegend/supermarket-FYP.git',
+                    credentialsId: 'github-creds'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building application...'
-                // Example build step
-                sh 'echo Simulating build process'
+                echo '✅ Build stage running...'
+                // Add build commands here later (e.g., composer install, npm build)
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running basic tests...'
-                // Example test step
-                sh 'echo All tests passed!'
+                echo '✅ Test stage running...'
+                // Placeholder for future tests
             }
         }
     }
 
     post {
-        success {
-            echo '✅ Pipeline finished successfully.'
-        }
         failure {
             echo '❌ Pipeline failed. Check logs above.'
         }
+        success {
+            echo '✅ Pipeline succeeded!'
+        }
     }
 }
+
 
 
