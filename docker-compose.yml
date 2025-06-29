@@ -38,8 +38,7 @@ services:
     ports:
       - "9090:8080"  # Access Jenkins at localhost:9090
     volumes:
-      - fyp_jenkins_home:/var/jenkins_home
-
+      - jenkins_home:/var/jenkins_home
     restart: always
 
   sonarqube:
