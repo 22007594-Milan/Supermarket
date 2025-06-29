@@ -22,10 +22,20 @@ pipeline {
             parallel {
                 stage('SonarQube Scan') {
                     steps {
-                        echo '🔍 Running SonarQube scan (placeholder)...'
-                        // sonar-scanner CLI command goes here
+                        withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
+                            withSonarQubeEnv('SonarQube') {
+                                sh '''
+                                    sonar-scanner \
+                                        -Dsonar.projectKey=supermarket \
+                                        -Dsonar.sources=. \
+                                        -Dsonar.host.url=http://sonarqube:9000 \
+                                        -Dsonar.login=${SONAR_AUTH_TOKEN}
+                                '''
+                            }
+                        }
                     }
                 }
+
                 stage('Dummy API Test') {
                     steps {
                         echo '🧪 Running dummy API test...'
@@ -60,5 +70,4 @@ pipeline {
         }
     }
 }
-
 
