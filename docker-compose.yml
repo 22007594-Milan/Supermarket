@@ -54,9 +54,7 @@ services:
   volumes:
     sonarqube_data:
     sonarqube_extensions:
+    jenkins_home:
 
-
-volumes:
-  jenkins_home:
 
 
