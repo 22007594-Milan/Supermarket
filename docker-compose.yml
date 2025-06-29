@@ -1,3 +1,4 @@
+version: "3.8"
 
 services:
   mysql_db:
@@ -44,17 +45,18 @@ services:
     image: sonarqube:latest
     container_name: sonarqube
     ports:
-      - "9000:9000"
+      - "9000:9000"  # Access SonarQube at localhost:9000
     environment:
       - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
     volumes:
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_extensions:/opt/sonarqube/extensions
 
-  volumes:
-    jenkins_home:
-    sonarqube_data:
-    sonarqube_extensions:
+volumes:
+  jenkins_home:
+  sonarqube_data:
+  sonarqube_extensions:
+
     
 
 
