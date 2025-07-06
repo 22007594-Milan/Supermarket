@@ -25,10 +25,10 @@ pipeline {
                         withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
                             withSonarQubeEnv('SonarQube') {
                                 sh '''
-                                    docker run --rm \
                                     -e SONAR_HOST_URL=http://sonarqube:9000 \
-                                    -e SONAR_TOKEN=${SONAR_AUTH_TOKEN} \
-                                    -v $(pwd):/usr/src \
+                                    -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
+                                    -v "$PWD:/usr/src" \
+                                    -v "$PWD/.scanner_cache:/opt/sonar-scanner/.sonar/cache" \
                                     sonarsource/sonar-scanner-cli \
                                     -Dsonar.projectKey=supermarket \
                                     -Dsonar.sources=. \
