@@ -25,6 +25,10 @@ pipeline {
                         withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
                             withSonarQubeEnv('SonarQube') {
                                 sh '''
+                                    echo "🧹 Preparing Sonar cache directory..."
+                                    mkdir -p .sonar/cache
+                                    chmod -R 777 .sonar
+                                    
                                     docker run --rm \
                                         -e SONAR_HOST_URL=http://sonarqube:9000 \
                                         -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
