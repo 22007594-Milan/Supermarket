@@ -3,9 +3,12 @@ FROM jenkins/jenkins:lts
 USER root
 
 # Install Docker CLI and Java
-RUN apt-get update && \
-    apt-get install -y docker.io openjdk-17-jdk && \
-    apt-get clean
+RUN apt-get update && apt-get install -y \
+    docker.io \
+    openjdk-17-jdk \
+    git \
+    && apt-get clean
+
 
 # Add Jenkins user to Docker group
 RUN usermod -aG docker jenkins
