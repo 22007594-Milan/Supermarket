@@ -32,7 +32,7 @@ pipeline {
                                     echo "🚀 Running SonarScanner in Docker..."
                                     docker run --rm \
                                         --user root \
-                                        --network devnet \
+                                        --network fyp_devnet \
                                         -e SONAR_HOST_URL=http://sonarqube:9000 \
                                         -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
                                         -e SONAR_USER_HOME=/usr/src/.sonar \
