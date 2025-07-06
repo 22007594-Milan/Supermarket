@@ -33,14 +33,21 @@ services:
     restart: unless-stopped
 
   jenkins:
-    image: jenkins/jenkins:lts
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins-sonar-docker
+    image: jenkins-with-sonar-and-docker
     container_name: jenkins
     ports:
-      - "9090:8080"  # Access Jenkins at localhost:9090
+      - "9090:8080"
+      - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
+    networks:
+      - devnet
+
 
   sonarqube:
     image: sonarqube:latest
