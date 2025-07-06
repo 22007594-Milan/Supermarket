@@ -30,6 +30,7 @@ pipeline {
                                     chmod -R 777 .sonar
 
                                     docker run --rm \
+                                        --user root \
                                         -e SONAR_HOST_URL=$SONAR_HOST_URL \
                                         -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
                                         -e SONAR_USER_HOME=/usr/src/.sonar \
@@ -39,6 +40,7 @@ pipeline {
                                         -Dsonar.projectKey=supermarket \
                                         -Dsonar.sources=. \
                                         -Dsonar.working.directory=.scannerwork
+
                                     '''
 
 
