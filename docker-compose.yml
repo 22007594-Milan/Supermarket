@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
 
   jenkins:
-    image: jenkins-with-sonarscanner
+    image: jenkins/jenkins:lts
     container_name: jenkins
     ports:
       - "9090:8080"  # Access Jenkins at localhost:9090
