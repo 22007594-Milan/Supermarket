@@ -47,7 +47,7 @@ $products = $stmt->fetchAll();
                         <li><a class="dropdown-item" href="index.php?category=Dairy">Dairy</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="index.php">All Products</a></li>
-                        <li><a href="contact.php">Contact Us</a></li>
+                        <li><a class="dropdown-item" href="contact.php">Contact Us</a></li>
 
                     </ul>
                 </li>
