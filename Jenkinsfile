@@ -33,6 +33,8 @@ pipeline {
                                     docker run --rm \
                                         --user root \
                                         --network fyp_devnet \
+                                        --add-host sonarqube:172.18.0.2 \
+                                        -e SONAR_HOST_URL=http://sonarqube:9000 \
                                         -e SONAR_HOST_URL=http://172.18.0.2:9000
                                         -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
                                         -e SONAR_USER_HOME=/usr/src/.sonar \
