@@ -48,7 +48,6 @@ $products = $stmt->fetchAll();
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="index.php">All Products</a></li>
                         <li><a class="dropdown-item" href="contact.php">Contact Us</a></li>
-
                     </ul>
                 </li>
             </ul>
