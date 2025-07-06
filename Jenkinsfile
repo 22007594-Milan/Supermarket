@@ -28,12 +28,13 @@ pipeline {
                                     echo "🧹 Preparing Sonar cache directory..."
                                     mkdir -p .sonar/cache
                                     chmod -R 777 .sonar
-                                    
+
                                     docker run --rm \
-                                        -e SONAR_HOST_URL=http://sonarqube:9000 \
+                                        -e SONAR_HOST_URL=$SONAR_HOST_URL \
                                         -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
                                         -e SONAR_USER_HOME=/usr/src/.sonar \
                                         -v "$PWD:/usr/src" \
+                                        -v "$PWD/.sonar:/usr/src/.sonar" \
                                         sonarsource/sonar-scanner-cli \
                                         -Dsonar.projectKey=supermarket \
                                         -Dsonar.sources=. \
