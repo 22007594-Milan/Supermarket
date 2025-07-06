@@ -29,7 +29,7 @@ pipeline {
                                         -Dsonar.projectKey=supermarket \
                                         -Dsonar.sources=. \
                                         -Dsonar.host.url=http://sonarqube:9000 \
-                                        -Dsonar.login=${SONAR_AUTH_TOKEN}
+                                        -Dsonar.token=${SONAR_AUTH_TOKEN}
                                 '''
                             }
                         }
@@ -56,7 +56,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo '🚀 Deploying application...'
-                // Your docker-compose or deployment script here
+                sh '''
+                    docker compose down
+                    docker compose build
+                    docker compose up -d
+                '''
             }
         }
     }
