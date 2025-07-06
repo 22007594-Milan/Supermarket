@@ -28,13 +28,14 @@ pipeline {
                                     docker run --rm \
                                         -e SONAR_HOST_URL=http://sonarqube:9000 \
                                         -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
+                                        -e SONAR_USER_HOME=/usr/src/.sonar \
                                         -v "$PWD:/usr/src" \
-                                        -v "$PWD/.scanner_cache:/opt/sonar-scanner/.sonar/cache" \
                                         sonarsource/sonar-scanner-cli \
                                         -Dsonar.projectKey=supermarket \
                                         -Dsonar.sources=. \
                                         -Dsonar.working.directory=.scannerwork
                                     '''
+
 
                             }
                         }
