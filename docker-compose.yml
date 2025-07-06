@@ -38,6 +38,7 @@ services:
       dockerfile: Dockerfile.jenkins
     image: jenkins-with-sonar-and-docker
     container_name: jenkins
+    user: root
     ports:
       - "9090:8080"
       - "50000:50000"
@@ -64,7 +65,7 @@ volumes:
   jenkins_home:
   sonarqube_data:
   sonarqube_extensions:
-  
+
 networks:
   devnet:
     driver: bridge
