@@ -46,8 +46,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
     networks:
-      devnet:
-        driver: bridge
+      - devnet
 
 
   sonarqube:
@@ -65,7 +64,10 @@ volumes:
   jenkins_home:
   sonarqube_data:
   sonarqube_extensions:
-
+  
+networks:
+  devnet:
+    driver: bridge
     
 
 
