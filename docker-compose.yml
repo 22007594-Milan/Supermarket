@@ -35,7 +35,7 @@ services:
   jenkins:
     build:
       context: .
-      dockerfile: Dockerfile.jenkins-sonar-docker
+      dockerfile: Dockerfile.jenkins
     image: jenkins-with-sonar-and-docker
     container_name: jenkins
     ports:
