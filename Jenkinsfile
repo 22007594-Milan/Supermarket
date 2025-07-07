@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    SONAR_AUTH_TOKEN = credentials('sonar-token') // 🔐 Adjust if needed
+    SONAR_AUTH_TOKEN = credentials('sonar-token') // 🔐 Your SonarQube token credential
   }
 
   stages {
@@ -18,7 +18,7 @@ pipeline {
     stage('Build') {
       steps {
         echo '🔧 Running build steps...'
-        // 🔨 Add build commands here
+        // 🛠️ Add build commands here
       }
     }
 
@@ -27,7 +27,7 @@ pipeline {
         stage('Dummy API Test') {
           steps {
             echo '🧪 Running dummy API test...'
-            // 💬 Add your API test logic here
+            // 💬 Add your test logic here
           }
         }
 
@@ -55,7 +55,6 @@ pipeline {
                   docker run --rm \
                     --user root \
                     --network fyp_devnet \
-                    --add-host sonarqube:172.18.0.2 \
                     -e SONAR_HOST_URL=http://sonarqube:9000 \
                     -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
                     -e SONAR_USER_HOME=/usr/src/.sonar \
@@ -85,7 +84,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo '🚢 Deploying the application...'
-        // 🚀 Add deploy commands here
+        // 🚀 Add deployment logic here
       }
     }
   }
@@ -99,5 +98,4 @@ pipeline {
     }
   }
 }
-
 
