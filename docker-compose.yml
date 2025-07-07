@@ -13,6 +13,8 @@ services:
     volumes:
       - ./mysql-init:/docker-entrypoint-initdb.d
       - ./mysql-supermarket:/mysql-supermarket
+    networks:
+      - devnet
 
   web1:
     build: ./webapp
@@ -22,6 +24,8 @@ services:
     ports:
       - "8080:80"
     restart: unless-stopped
+    networks:
+      - devnet
 
   web2:
     build: ./webapp
@@ -31,6 +35,8 @@ services:
     ports:
       - "8081:80"
     restart: unless-stopped
+    networks:
+      - devnet
 
   jenkins:
     build:
@@ -47,21 +53,20 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
     networks:
-      mynetwork:
-        driver: bridge
-
-
+      - devnet
 
   sonarqube:
     image: sonarqube:latest
     container_name: sonarqube
     ports:
-      - "9000:9000"  # Access SonarQube at localhost:9000
+      - "9000:9000"
     environment:
       - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
     volumes:
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_extensions:/opt/sonarqube/extensions
+    networks:
+      - devnet
 
 volumes:
   jenkins_home:
@@ -71,7 +76,5 @@ volumes:
 networks:
   devnet:
     driver: bridge
-    
-
 
 
