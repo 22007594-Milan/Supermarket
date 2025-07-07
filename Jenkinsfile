@@ -73,13 +73,13 @@ pipeline {
     }
 
     stage('Gatekeeper Approval') {
-      when {
-        branch 'main'
-      }
-      steps {
-        input message: '🚦 Deploy to production?'
-      }
+        steps {
+            script {
+                input message: '✅ Approve to deploy to production?', ok: 'Approve Deployment'
+            }
+        }
     }
+
 
     stage('Deploy') {
       steps {
