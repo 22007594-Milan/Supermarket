@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    SONAR_AUTH_TOKEN = credentials('sonar-token')  // Adjust to your credential ID
+    SONAR_AUTH_TOKEN = credentials('sonar-token') // 🔐 Adjust if needed
   }
 
   stages {
@@ -18,7 +18,7 @@ pipeline {
     stage('Build') {
       steps {
         echo '🔧 Running build steps...'
-        // your build logic here
+        // 🔨 Add build commands here
       }
     }
 
@@ -26,17 +26,15 @@ pipeline {
       parallel {
         stage('Dummy API Test') {
           steps {
-            withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
-              echo '🧪 Running dummy API test...'
-              // insert your test logic here
-            }
+            echo '🧪 Running dummy API test...'
+            // 💬 Add your API test logic here
           }
         }
 
         stage('SonarQube Scan') {
           steps {
             withSonarQubeEnv('SonarQube') {
-              script {
+              withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
                 sh '''
                   echo "🧹 Preparing Sonar cache directory..."
                   mkdir -p .sonar/cache
@@ -44,9 +42,9 @@ pipeline {
 
                   echo "⏳ Waiting for SonarQube to be ready..."
                   for i in {1..10}; do
-                    STATUS=$(curl -s http://sonarqube:9000/api/system/status | grep -o '"status":"[A-Z]*"' || true)
+                    STATUS=$(curl -s http://sonarqube:9000/api/system/status | grep -o '"status":"[A-Z]*"' | cut -d':' -f2 | tr -d '"' || echo "DOWN")
                     echo "SonarQube status: $STATUS"
-                    if echo "$STATUS" | grep -q '"status":"UP"'; then
+                    if [ "$STATUS" = "UP" ]; then
                       echo "✅ SonarQube is ready!"
                       break
                     fi
@@ -80,25 +78,26 @@ pipeline {
         branch 'main'
       }
       steps {
-        input message: 'Deploy to production?'
+        input message: '🚦 Deploy to production?'
       }
     }
 
     stage('Deploy') {
       steps {
         echo '🚢 Deploying the application...'
-        // your deployment logic here
+        // 🚀 Add deploy commands here
       }
     }
   }
 
   post {
-    failure {
-      echo '❌ Pipeline failed.'
-    }
     success {
-      echo '🟢 Pipeline passed! Let’s gooo.'
+      echo '🟢 Pipeline passed! Well done.'
+    }
+    failure {
+      echo '❌ Pipeline failed. But you? Never.'
     }
   }
 }
+
 
