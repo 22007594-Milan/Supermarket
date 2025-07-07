@@ -42,14 +42,14 @@ pipeline {
 
                   echo "⏳ Waiting for SonarQube to be ready..."
                   for i in {1..10}; do
-                    STATUS=$(curl -s http://sonarqube:9000/api/system/status | grep -o '"status":"[A-Z]*"' | cut -d':' -f2 | tr -d '"' || echo "DOWN")
+                    STATUS=$(curl -s http://sonarqube:9000/api/system/status | grep -o '"status":"[A-Z]*"' | cut -d':' -f2 | tr -d '"')
                     echo "SonarQube status: $STATUS"
                     if [ "$STATUS" = "UP" ]; then
-                      echo "✅ SonarQube is ready!"
-                      break
+                        echo "✅ SonarQube is ready!"
+                        break
                     fi
                     sleep 10
-                  done
+                  done 
 
                   echo "🚀 Running SonarScanner in Docker..."
                   docker run --rm \
