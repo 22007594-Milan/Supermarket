@@ -31,44 +31,31 @@ pipeline {
           }
         }
 
-        stage('SonarQube Scan') {
-          steps {
-            withSonarQubeEnv('SonarQube') {
-              withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
-                sh '''
-                  echo "🧹 Preparing Sonar cache directory..."
-                  mkdir -p .sonar/cache
-                  chmod -R 777 .sonar
 
-                  echo "⏳ Waiting for SonarQube to be ready..."
-                  for i in {1..10}; do
-                    STATUS=$(curl -s http://sonarqube:9000/api/system/status | grep -o '"status":"[A-Z]*"' | cut -d':' -f2 | tr -d '"')
-                    echo "SonarQube status: $STATUS"
-                    if [ "$STATUS" = "UP" ]; then
-                        echo "✅ SonarQube is ready!"
-                        break
-                    fi
-                    sleep 10
-                  done 
-
-                  echo "🚀 Running SonarScanner in Docker..."
-                  docker run --rm \
-                    --user root \
-                    --network fyp_devnet \
-                    -e SONAR_HOST_URL=http://sonarqube:9000 \
-                    -e SONAR_TOKEN=$SONAR_AUTH_TOKEN \
-                    -e SONAR_USER_HOME=/usr/src/.sonar \
-                    -v "$PWD:/usr/src" \
-                    -v "$PWD/.sonar:/usr/src/.sonar" \
-                    sonarsource/sonar-scanner-cli \
-                    -Dsonar.projectKey=supermarket \
-                    -Dsonar.sources=. \
-                    -Dsonar.working.directory=.scannerwork
-                '''
-              }
-            }
-          }
+ stage('SonarQube Analysis') {
+    steps {
+        echo 'Running SonarQube analysis...'
+        withCredentials([string(credentialsId: 'jenkins-token', variable: 'SONAR_TOKEN')]) {
+            // List files in Jenkins workspace BEFORE running Docker (for debugging)
+            sh 'ls -l $WORKSPACE'
+            sh 'ls -l $WORKSPACE/webapp'
+            sh '''
+                docker run --rm \
+                  --network fyp_fyp_devnet \
+                  -v $WORKSPACE:/usr/src \
+                  -v $WORKSPACE/.sonar:/usr/src/.sonar \
+                  sonarsource/sonar-scanner-cli:latest \
+                  sh -c "ls -l /usr/src && ls -l /usr/src/webapp && sonar-scanner \
+                    -Dsonar.projectKey=my-fyp-project \
+                    -Dsonar.sources=webapp \
+                    -Dsonar.host.url=http://sonarqube:9000 \
+                    -Dsonar.token=$SONAR_TOKEN \
+                    -Dsonar.iac.skip=true"
+            '''
         }
+    }
+}
+      
       }
     }
 

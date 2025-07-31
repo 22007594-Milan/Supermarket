@@ -25,7 +25,7 @@ $products = $stmt->fetchAll();
     <h2 class="mb-4">Admin Dashboard</h2>
 
     <div class="mb-3">
-        <a href="admin_orders.php" class="btn btn-primary">Manage Orders</a> <!-- Link to orders.php -->
+        <a href="admin_orders.php" class="btn btn-primary">Manage Order</a> <!-- Link to orders.php -->
         <a href="add_product.php" class="btn btn-success">+ Add New Product</a>
         <a href="logout.php" class="btn btn-secondary">Logout</a>
     </div>

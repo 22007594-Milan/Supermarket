@@ -1,5 +1,5 @@
 version: "3.8"
-
+ 
 services:
   mysql_db:
     image: mysql:latest
@@ -15,7 +15,7 @@ services:
       - ./mysql-supermarket:/mysql-supermarket
     networks:
       - devnet
-
+ 
   web1:
     build: ./webapp
     container_name: web1
@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
     networks:
       - devnet
-
+ 
   web2:
     build: ./webapp
     container_name: web2
@@ -37,7 +37,7 @@ services:
     restart: unless-stopped
     networks:
       - devnet
-
+ 
   jenkins:
     build:
       context: .
@@ -54,7 +54,7 @@ services:
     restart: always
     networks:
       - devnet
-
+ 
   sonarqube:
     image: sonarqube:latest
     container_name: sonarqube
@@ -68,13 +68,33 @@ services:
     networks:
       - devnet
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: mysql_db
+      MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - mysql_db
+    networks:
+      - devnet
+ 
+    
+ 
 volumes:
   jenkins_home:
   sonarqube_data:
   sonarqube_extensions:
-
+ 
 networks:
   devnet:
     driver: bridge
+ 
+ 
+
+
 
 

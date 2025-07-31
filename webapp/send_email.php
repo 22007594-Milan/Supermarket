@@ -16,13 +16,13 @@ function send_2fa_email($to, $code) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'mysupermarket12@gmail.com'; // Your Gmail address
-        $mail->Password = 'dpbl zuls tlnu psdm';        // App-specific password
+        $mail->Username = 'milanshaju12@gmail.com'; // Your Gmail address
+        $mail->Password = 'bziu yyti wmng dwim';        // App-specific password
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
         // Sender and recipient
-        $mail->setFrom('mysupermarket12@gmail.com', 'My Supermarket'); // Must match $mail->Username
+        $mail->setFrom('milanshajut12@gmail.com', 'My Supermarket'); // Must match $mail->Username
         $mail->addAddress($to);
 
         // Email content

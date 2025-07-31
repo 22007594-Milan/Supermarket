@@ -1,0 +1,6 @@
+projectKey=my-fyp-project
+serverUrl=http://localhost:9000
+serverVersion=25.7.0.110598
+dashboardUrl=http://localhost:9000/dashboard?id=my-fyp-project
+ceTaskId=f4527bc9-643a-477d-a192-f786b23a7688
+ceTaskUrl=http://localhost:9000/api/ce/task?id=f4527bc9-643a-477d-a192-f786b23a7688
