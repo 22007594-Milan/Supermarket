@@ -47,7 +47,7 @@ pipeline {
                   sh -c "ls -l /usr/src && ls -l /usr/src/webapp && sonar-scanner \
                     -Dsonar.projectKey=my-fyp-project \
                     -Dsonar.sources=webapp \
-                    -Dsonar.host.url=http://sonarqube:9000 \
+                    -Dsonar.host.url=http://localhost:9000 \
                     -Dsonar.token=$SONAR_TOKEN \
                     -Dsonar.iac.skip=true"
             '''
