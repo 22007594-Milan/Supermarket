@@ -34,7 +34,7 @@ pipeline {
  stage('SonarQube Analysis') {
     steps {
         echo 'Running SonarQube analysis...'
-        withCredentials([string(credentialsId: 'jenkins-token', variable: 'SONAR_TOKEN')]) {
+        withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
             // List files in Jenkins workspace BEFORE running Docker (for debugging)
             sh 'ls -l $WORKSPACE'
             sh 'ls -l $WORKSPACE/webapp'
