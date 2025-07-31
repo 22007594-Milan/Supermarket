@@ -44,7 +44,7 @@ pipeline {
                   sonarsource/sonar-scanner-cli \
                   -Dsonar.projectKey=my-fyp-project \
                   -Dsonar.sources=. \
-                  -Dsonar.host.url=http://sonarqube:9000 \
+                  -Dsonar.host.url=http://172.17.0.1:9000 \
                   -Dsonar.token=sqa_0b612e98b302d1037cf4b7b4bc036897d2634f6c \
                   -Dsonar.iac.skip=true
               '''
