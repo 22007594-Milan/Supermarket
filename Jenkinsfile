@@ -40,7 +40,7 @@ pipeline {
             sh 'ls -l $WORKSPACE/webapp'
             sh '''
                 docker run --rm \
-                  --network fyp_fyp_devnet \
+                  
                   -v $WORKSPACE:/usr/src \
                   -v $WORKSPACE/.sonar:/usr/src/.sonar \
                   sonarsource/sonar-scanner-cli:latest \
