@@ -11,7 +11,7 @@ pipeline {
       steps {
         echo 'Cloning from GitHub...'
         git credentialsId: 'github-creds',
-            url: 'https://github.com/NivethLegend/supermarket-FYP.git',
+            url: 'https://github.com/22007594-Milan/Supermarket.git',
             branch: 'main'
       }
     }
@@ -45,7 +45,7 @@ pipeline {
                   -Dsonar.projectKey=my-fyp-project \
                   -Dsonar.sources=. \
                   -Dsonar.host.url=http://sonarqube:9000 \
-                  -Dsonar.token=sqa_1246957a4bfe4c46085d5a2bd485ecfc6ecca25a \
+                  -Dsonar.token=sqa_0b612e98b302d1037cf4b7b4bc036897d2634f6c \
                   -Dsonar.iac.skip=true
               '''
             }
