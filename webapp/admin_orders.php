@@ -56,7 +56,7 @@ $orders = $stmt->fetchAll();
                     <tr>
                         <td><?= $order['id'] ?></td>
                         <td><?= htmlspecialchars($order['username']) ?></td>
-                        <td><?= htmlspecialchars($order['product_names']) ?></td> <!-- Display concatenated product names -->
+                        <td><?= htmlspecialchars($order['product_names']) ?></td> 
                         <td><?= number_format($order['total_amount'], 2) ?></td>
                         <td><?= htmlspecialchars($order['shipping_address']) ?></td>
                         <td>

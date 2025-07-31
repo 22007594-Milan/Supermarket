@@ -7,13 +7,12 @@ pipeline {
 
   stages {
     stage('Clone Repository') {
-      steps {
+    steps {
         echo '📦 Cloning from GitHub...'
-        git credentialsId: 'github-creds',
-            url: 'https://github.com/NivethLegend/supermarket-FYP.git',
-            branch: 'main'
-      }
+        git url: 'https://github.com/22007594-Milan/Supermarket.git', branch: 'main'
     }
+}
+
 
     stage('Build') {
       steps {
